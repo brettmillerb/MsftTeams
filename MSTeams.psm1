@@ -1,1 +1,1 @@
-. $psscriptroot\New-TeamsMessage.ps1
+. $psscriptroot\public\New-TeamsMessage.ps1
