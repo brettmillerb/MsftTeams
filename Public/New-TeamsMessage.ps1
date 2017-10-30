@@ -59,22 +59,22 @@ function New-TeamsMessage {
             ParameterSetName = 'Simple',
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true)]
-        [ValidatePattern('[\w\d-: ]')]
+        [ValidatePattern('^[\w\d-: ]*$')]
         [string]$Message,
         
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Detailed')]
-        [ValidatePattern('[\w\d-: ]')]
+        [ValidatePattern('^[\w\d-: ]*$')]
         [string]$ConnectorTitle,
 
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Detailed')]
-        [ValidatePattern('[\w\d-: ]')]
+        [ValidatePattern('^[\w\d-: ]*$')]
         [string]$ActivityTitle,
 
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Detailed')]
-        [ValidatePattern('[\w\d-: ]')]
+        [ValidatePattern('^[\w\d-: ]*$')]
         [string]$ActivitySubtitle,
         
         [Parameter(Mandatory = $true,
