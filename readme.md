@@ -22,7 +22,8 @@ New-TeamsMessage -ConnectorTitle 'This A Test Post To Teams' -ActivityTitle 'Thi
 
 Passing Details information requires a hashtable of key / value pairs and can be created with the following
 
-```$info = @{
+```
+$info = @{
     Enabled = $true
     givenname = 'Brett'
     emailaddress = 'brettm@opentext.com
