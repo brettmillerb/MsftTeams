@@ -27,6 +27,7 @@ Passing Details information requires a hashtable of key / value pairs and can be
     givenname = 'Brett'
     emailaddress = 'brettm@opentext.com
     surname = 'Miller'
-}```
+}
 
-```New-TeamsMessage -ConnectorTitle 'Connector Title -ActivityTitle 'Activity Title' -ActivitySubtitle 'Activity Subtitle' -Information $info```
+New-TeamsMessage -ConnectorTitle 'Connector Title -ActivityTitle 'Activity Title' -ActivitySubtitle 'Activity Subtitle' -Information $info
+```
