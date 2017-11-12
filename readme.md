@@ -14,7 +14,7 @@ For posting messages to an Incoming Webhook within a Microsoft Teams channel.
 `New-TeamsMessage -Message 'test message for teams'`
 
 ### Detailed Message Use
-New-TeamsMessage -ConnectorTitle 'This A Test Post To Teams' -ActivityTitle 'This works pretty well' -ActivitySubtitle 'Formatting is pretty good too' -Information $info
+`New-TeamsMessage -ConnectorTitle 'This A Test Post To Teams' -ActivityTitle 'This works pretty well' -ActivitySubtitle 'Formatting is pretty good too' -Information $info`
 
 Passing Details information requires a hashtable of key / value pairs and can be created with the following
 
@@ -26,5 +26,3 @@ $info = @{
     surname = 'Miller'
 }
 ```
-
-`New-TeamsMessage -ConnectorTitle 'Connector Title -ActivityTitle 'Activity Title' -ActivitySubtitle 'Activity Subtitle' -Information $info`
