@@ -22,7 +22,7 @@ Passing Details information requires a hashtable of key / value pairs and can be
 $info = @{
     Enabled = $true
     givenname = 'Brett'
-    emailaddress = 'brettm@opentext.com
+    emailaddress = 'brettm@millerb.co.uk
     surname = 'Miller'
 }
 ```
