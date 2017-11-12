@@ -56,37 +56,41 @@ function New-TeamsMessage {
     [CmdletBinding(DefaultParameterSetName = 'Simple')]
     Param (
         [Parameter(Mandatory = $true,
-            ParameterSetName = 'Simple',
-            ValueFromPipeline = $true,
-            ValueFromPipelineByPropertyName = $true)]
+                   ParameterSetName = 'Simple',
+                   ValueFromPipeline = $true,
+                   ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('^[\w\d-: ]*$')]
         [string]$Message,
         
         [Parameter(Mandatory = $true,
-            ParameterSetName = 'Detailed')]
+                   ParameterSetName = 'Detailed')]
         [ValidatePattern('^[\w\d-: ]*$')]
         [string]$ConnectorTitle,
 
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'Detailed')]
+                   ParameterSetName = 'Detailed')]
         [ValidatePattern('^[\w\d-: ]*$')]
         [string]$ActivityTitle,
 
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'Detailed')]
+                   ParameterSetName = 'Detailed')]
         [ValidatePattern('^[\w\d-: ]*$')]
         [string]$ActivitySubtitle,
         
         [Parameter(Mandatory = $true,
-            ParameterSetName = 'Detailed')]
+                   ParameterSetName = 'Detailed')]
         [hashtable]$Information,
+
+        [Parameter(Mandatory = $false,
+                   ParameterSetName = 'Simple')]
+        [Parameter(Mandatory = $false,
+                   ParameterSetName = 'Detailed')]
+        [string]$WebhookURI = "https://outlook.office.com/webhook/GUID",
         
         [string]$Proxy = $null
     )
     
     process {
-        $tsturi = "https://outlook.office.com/webhook/GUID"
-
         if ($message) {
             $body =  ConvertTo-Json @{
                 text = $message
@@ -114,7 +118,7 @@ function New-TeamsMessage {
         }
 
         $restparams = @{
-            Uri = $tsturi
+            Uri = $WebhookURI
             Method = 'POST'
             Body = $body
             ContentType = 'application/JSON'
