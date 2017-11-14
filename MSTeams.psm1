@@ -143,4 +143,31 @@ $ColorMap = @{
     yellowgreen             = "9ACD32"
 }
 
-Export-ModuleMember -Function New-TeamsMessage -Variable $ColorMap
+$BaseJSON = @"
+{
+    "@type":  "MessageCard",
+    "@Context":  "http://schema.org/extensions",
+    "themeColor":  null,
+    "title":  null
+    "text":  null,
+    "sections":  [
+        {
+            "facts":  null,
+            "potentialAction":  [
+                {
+                    "name":  null,
+                    "@type":  "OpenUri",
+                    "targets":  [
+                        {
+                            "os":  "default",
+                            "uri":  null
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+}
+"@
+
+Export-ModuleMember -Function New-TeamsMessage -Variable ColorMap, BaseJSON
