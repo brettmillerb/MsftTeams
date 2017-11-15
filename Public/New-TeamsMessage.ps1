@@ -1,121 +1,64 @@
 function New-TeamsMessage {
-    <#
-    .SYNOPSIS
-    Posts a new message to Teams as a connector card
-    
-    .DESCRIPTION
-    Posts a new message to Teams as a connector card.
-    Can accept a simple string message or a hashtable converted to string.
-    
-    .PARAMETER Message
-    Simple String message consisting of alphanumeric characters
-    
-    .PARAMETER ConnectorTitle
-    Main title of the connector card
-    
-    .PARAMETER ActivityTitle
-    Activity to notify about
-
-    .PARAMETER ActivitySubtitle
-    Further information regarding the activity
-
-    .PARAMETER information
-    The body of information to be added to the connector card
-    
-    .PARAMETER proxy
-    Proxy Switch if this is to be used when behind a proxy
-    
-    .EXAMPLE
-    "This is a Teams message" | New-TeamsMessage
-    Description
-    -----------
-    This command accepts pipeline input of string messages.
-
-    .EXAMPLE
-    New-TeamsMessage -Message 'This is a basic string Message'
-    Description
-    -----------
-    This command allows string messages to be passed in as parameters
-
-    .EXAMPLE
-    $info = $hashtable | ConvertFrom-Hashtable
-    New-TeamsMessage -ConnectorTitle 'Build for Customer ABC' -Information $Info
-    Description
-    -----------
-    This command converts a hashtable to string input for more detailed output
-
-    .EXAMPLE
-    New-TeamsMessage -ConnectorTitle 'User Deletion Script' -Information $Info -Proxy
-    Description
-    -----------
-    This command creates a connector card with only the Card Title and Information with the proxy switch 
-    
-    .NOTES
-    Requires ActiveDirectory Module
-    #>
     [CmdletBinding(DefaultParameterSetName = 'Simple')]
+    
     Param (
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Simple',
-                   ValueFromPipeline = $true,
-                   ValueFromPipelineByPropertyName = $true)]
-        [ValidatePattern('^[\w\d-: ]*$')]
-        [string]$Message,
+        ParameterSetName = 'Simple',
+        ValueFromPipeline = $true,
+        ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $false,
+        ParameterSetName = 'Detailed')]
+        [ValidatePattern('^[\w\d-:*_ ]*$')]
+        [string]$Text,
         
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-: ]*$')]
-        [string]$ConnectorTitle,
-
+        [ValidatePattern('^[\w\d-:*_ ]*$')]
+        [string]$Title,
+        
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-: ]*$')]
+        [ValidatePattern('^[\w\d-:*_ ]*$')]
         [string]$ActivityTitle,
 
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-: ]*$')]
+        [ValidatePattern('^[\w\d-:*_ ]*$')]
         [string]$ActivitySubtitle,
         
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Detailed')]
-        [hashtable]$Information,
+        [hashtable]$Facts,
 
-        [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Simple')]
-        [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Detailed')]
-        [string]$WebhookURI = "https://outlook.office.com/webhook/GUID",
+        [Alias('Colour')]
+        [string]$Color,
+
+        [string]$WebhookURI = "https://outlook.office.com/webhook/6b30fed8-9751-42ae-bf22-7e53707415dd@10a18477-d533-4ecd-a78d-916dbd849d7c/IncomingWebhook/7db935583625447aaee65d2fc4db5bee/e006ec67-8f1c-44bb-bf87-a42399ccb521",
         
         [string]$Proxy = $null
     )
     
     process {
-        if ($message) {
-            $body =  ConvertTo-Json @{
-                text = $message
-            }
+        if ($CardText) {
+                $JSONHash.text = $CardText
         }
-        else {
-            if ($information) {
-                $facts = $information | ConvertFrom-Hashtable
-            }
+        if ($CardTitle) {
+            $JSONHash.title = $CardTitle
+        }
+        if ($ActivityTitle) {
+            $JSONHash.sections.activitytitle = $ActivityTitle
+        }
+        if ($ActivitySubtitle) {
+            $JSONHash.sections.activitysubtitle = $ActivitySubtitle
+        }
+        if ($Facts) {
+            $JSONHash.sections[1].facts = $Facts | ConvertFrom-Hashtable
+        }
+        if ($Color) {
+            $JSONHash.themeColor = $ColorMap[$Color]
+        }
 
-            $body = ConvertTo-Json -Depth 4 @{
-                Summary = 'Automation Alert Connector Card'
-                title = $connectortitle
-                sections = @(
-                    @{
-                        activityTitle = $activitytitle
-                        activitySubtitle = $activitysubtitle
-                    },
-                    @{
-                        title = 'Details:'
-                        facts = $facts
-                    }
-                )
-            }
-        }
+        $body = $JSONHash | ConvertTo-Json -Depth 10
 
         $restparams = @{
             Uri = $WebhookURI
@@ -125,6 +68,6 @@ function New-TeamsMessage {
             Proxy = if ($Proxy) {$proxy}
         }
 
-        Invoke-RestMethod @restparams | Out-Null
+        $null = Invoke-RestMethod @restparams
     }
 }

@@ -152,6 +152,10 @@ $JSONHash = @{
     'text'                = $null
     'sections'            = @(
         @{
+            'activitytitle'     = $null
+            'activitysubtitle'  = $null
+        },
+        @{
             'facts'             = $null
             'potentialAction'   = @(
                 @{
@@ -167,6 +171,147 @@ $JSONHash = @{
             )
         }
     )
+}
+
+enum ColorsSet {
+    beige
+    paleturquoise
+    olivedrab
+    bisque
+    darkgreen
+    red
+    lavender
+    white
+    steelblue
+    darkslateblue
+    aquamarine
+    powderblue
+    lightgreen
+    plum
+    lightskyblue
+    silver
+    papayawhip
+    gold
+    saddlebrown
+    darkolivegreen
+    violet
+    springgreen
+    aliceblue
+    purple
+    mediumturquoise
+    linen
+    dimgray
+    sienna
+    darkslategray
+    azure
+    snow
+    cornsilk
+    gainsboro
+    thistle
+    lemonchiffon
+    lightgoldenrodyellow
+    teal
+    lavenderblush
+    green
+    darkblue
+    maroon
+    dodgerblue
+    slateblue
+    lightgrey
+    lightcyan
+    rosybrown
+    orangered
+    darkgray
+    whitesmoke
+    navajowhite
+    mediumpurple
+    mediumorchid
+    antiquewhite
+    mediumslateblue
+    darkorchid
+    sandybrown
+    floralwhite
+    mediumseagreen
+    lightyellow
+    darkorange
+    brown
+    yellowgreen
+    moccasin
+    palevioletred
+    midnightblue
+    mintcream
+    indigo
+    darkkhaki
+    chocolate
+    lightslategray
+    khaki
+    mediumspringgreen
+    tan
+    ghostwhite
+    darkred
+    fuchsia
+    gray
+    firebrick
+    blueviolet
+    lightpink
+    lightcoral
+    crimson
+    deepskyblue
+    palegoldenrod
+    darkgoldenrod
+    seashell
+    cadetblue
+    seagreen
+    darkturquoise
+    yellow
+    forestgreen
+    lightseagreen
+    royalblue
+    mediumblue
+    navy
+    pink
+    lime
+    limegreen
+    darksalmon
+    salmon
+    black
+    lightsalmon
+    darkmagenta
+    mediumaquamarine
+    indianred
+    blue
+    darkviolet
+    skyblue
+    cornflowerblue
+    wheat
+    greenyellow
+    deeppink
+    lightblue
+    honeydew
+    palegreen
+    ivory
+    turquoise
+    lightsteelblue
+    slategray
+    olive
+    peru
+    orchid
+    mistyrose
+    tomato
+    goldenrod
+    burlywood
+    orange
+    mediumvioletred
+    lawngreen
+    oldlace
+    darkseagreen
+    darkcyan
+    hotpink
+    blanchedalmond
+    peachpuff
+    coral
+    chartreuse
+    aqua    
 }
 
 Export-ModuleMember -Function New-TeamsMessage -Variable ColorMap, JSONHash
