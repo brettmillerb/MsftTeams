@@ -32,7 +32,10 @@ function New-TeamsMessage {
     Proxy Switch so you can define a proxy to Invoke-RestMethod
     
     .EXAMPLE
-    An example
+    New-TeamsMessage -Text 'This is a simple Message'
+
+    .EXAMPLE
+    New-TeamsMessage -Title 'This is the card title' -Text 'This is the card Text' -Color Red
     
     .NOTES
     General notes
@@ -76,6 +79,11 @@ function New-TeamsMessage {
         
         [string]$Proxy = $null
     )
+
+    begin {
+        $BaseJsonObj = Import-LocalizedData -BaseDirectory $PSScriptRoot\private -FileName BaseJsonObj.psd1
+        $JSONHash = $BaseJsonObj.baseJson | ConvertFrom-Json
+    }
     
     process {
         if ($Text) {
