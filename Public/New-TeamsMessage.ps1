@@ -81,8 +81,7 @@ function New-TeamsMessage {
     )
 
     begin {
-        $BaseJsonObj = Import-LocalizedData -BaseDirectory $PSScriptRoot\private -FileName BaseJsonObj.psd1
-        $JSONHash = $BaseJsonObj.baseJson | ConvertFrom-Json
+        $JSONHash = New-BaseJsonObj
     }
     
     process {

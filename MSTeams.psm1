@@ -143,4 +143,4 @@ $ColorMap = @{
     yellowgreen             = "9ACD32"
 }
 
-Export-ModuleMember -Function New-TeamsMessage -Variable ColorMap, JSONHash
+Export-ModuleMember -Function New-TeamsMessage -Variable ColorMap
