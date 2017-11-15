@@ -152,10 +152,13 @@ $JSONHash = @{
     'text'                = $null
     'sections'            = @(
         @{
+<<<<<<< HEAD
             'activitytitle'     = $null
             'activitysubtitle'  = $null
         },
         @{
+=======
+>>>>>>> f4e1ec7... Added BaseJSON hash to script file
             'facts'             = $null
             'potentialAction'   = @(
                 @{
@@ -173,6 +176,7 @@ $JSONHash = @{
     )
 }
 
+<<<<<<< HEAD
 enum ColorsSet {
     beige
     paleturquoise
@@ -314,4 +318,6 @@ enum ColorsSet {
     aqua    
 }
 
+=======
+>>>>>>> f4e1ec7... Added BaseJSON hash to script file
 Export-ModuleMember -Function New-TeamsMessage -Variable ColorMap, JSONHash

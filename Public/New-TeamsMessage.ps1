@@ -33,7 +33,7 @@ function New-TeamsMessage {
         [Alias('Colour')]
         [string]$Color,
 
-        [string]$WebhookURI = "https://outlook.office.com/webhook/6b30fed8-9751-42ae-bf22-7e53707415dd@10a18477-d533-4ecd-a78d-916dbd849d7c/IncomingWebhook/7db935583625447aaee65d2fc4db5bee/e006ec67-8f1c-44bb-bf87-a42399ccb521",
+        [string]$WebhookURI = "https://outlook.office.com/webhook/GUID",
         
         [string]$Proxy = $null
     )
