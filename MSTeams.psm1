@@ -143,34 +143,4 @@ $ColorMap = @{
     yellowgreen             = "9ACD32"
 }
 
-$JSONHash = @{
-    '@type'               = 'MessageCard'
-    '@Context'            = 'http://schema.org/extensions'
-    'Summary'             = $null
-    'themeColor'          = $null
-    'title'               = $null
-    'text'                = $null
-    'sections'            = @(
-        @{
-            'activitytitle'     = $null
-            'activitysubtitle'  = $null
-        },
-        @{
-            'facts'             = $null
-            'potentialAction'   = @(
-                @{
-                    '@type'     = 'OpenUri'
-                    'name'      = $null
-                    'targets'   = @(
-                        @{
-                            'os'    = 'default'
-                            'uri'   = $null
-                        }
-                    )
-                }
-            )
-        }
-    )
-}
-
 Export-ModuleMember -Function New-TeamsMessage -Variable ColorMap, JSONHash
