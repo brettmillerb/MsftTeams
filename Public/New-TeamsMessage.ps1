@@ -1,13 +1,52 @@
 function New-TeamsMessage {
+    <#
+    .SYNOPSIS
+    Posts a new message to Incoming Webhook in MSTeams as a connector card
+    
+    .DESCRIPTION
+    Enables construction of Connector Cards to be passed to the Incoming Webhook of a MS Teams Channel
+    This can accept hashtables as part of the Connector Card
+    
+    .PARAMETER Text
+    A simple message to post to a Connector Card - Supports Markdown
+    
+    .PARAMETER Title
+    Title of the Connector Card - Appears at the top of the card in large text formatting
+    
+    .PARAMETER ActivityTitle
+    Heading for the Activity Title within a section on the Connector Card
+    
+    .PARAMETER ActivitySubtitle
+    Further information regarding the passed information
+    
+    .PARAMETER Facts
+    Hashtable or Ordered Dictionary to display on the Connector Card
+    
+    .PARAMETER Color
+    Colour Highlighting of the Connector Card
+    
+    .PARAMETER WebhookURI
+    The URL from the Incoming Webhook which is to display the information
+    
+    .PARAMETER Proxy
+    Proxy Switch so you can define a proxy to Invoke-RestMethod
+    
+    .EXAMPLE
+    An example
+    
+    .NOTES
+    General notes
+    #>
     [CmdletBinding(DefaultParameterSetName = 'Simple')]
     
     Param (
         [Parameter(Mandatory = $true,
-        ParameterSetName = 'Simple',
-        ValueFromPipeline = $true,
-        ValueFromPipelineByPropertyName = $true)]
+                   Position = 0,
+                   ParameterSetName = 'Simple',
+                   ValueFromPipeline = $true,
+                   ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $false,
-        ParameterSetName = 'Detailed')]
+                   ParameterSetName = 'Detailed')]
         [ValidatePattern('^[\w\d-:*_ ]*$')]
         [string]$Text,
         
@@ -39,11 +78,11 @@ function New-TeamsMessage {
     )
     
     process {
-        if ($CardText) {
-                $JSONHash.text = $CardText
+        if ($Text) {
+            $JSONHash.text = $Text
         }
-        if ($CardTitle) {
-            $JSONHash.title = $CardTitle
+        if ($Title) {
+            $JSONHash.title = $Title
         }
         if ($ActivityTitle) {
             $JSONHash.sections.activitytitle = $ActivityTitle
