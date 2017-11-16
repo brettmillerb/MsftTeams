@@ -44,19 +44,20 @@ function New-TeamsMessage {
     
     Param (
         [Parameter(Mandatory = $true,
-                   Position = 0,
                    ParameterSetName = 'Simple',
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
+        [string]$message,
+
+        [Parameter(Mandatory = $true,
+        ParameterSetName = 'Detailed')]
+        [ValidatePattern('^[\w\d-:*_ ]*$')]
+        
+        [string]$Title,
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'Detailed')]
         [ValidatePattern('^[\w\d-:*_ ]*$')]
         [string]$Text,
-        
-        [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
-        [string]$Title,
         
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'Detailed')]
@@ -85,22 +86,25 @@ function New-TeamsMessage {
     }
     
     process {
-        if ($Text) {
+        if ($PSBoundParameters.ContainsKey('Text')) {
             $JSONHash.text = $Text
         }
-        if ($Title) {
+        if ($PSBoundParameters.ContainsKey('Message')) {
+            $JSONHash.text = $Text
+        }
+        if ($PSBoundParameters.ContainsKey('Title')) {
             $JSONHash.title = $Title
         }
-        if ($ActivityTitle) {
+        if ($PSBoundParameters.ContainsKey('ActivityTitle')) {
             $JSONHash.sections.activitytitle = $ActivityTitle
         }
-        if ($ActivitySubtitle) {
+        if ($PSBoundParameters.ContainsKey('ActivitySubtitle')) {
             $JSONHash.sections.activitysubtitle = $ActivitySubtitle
         }
-        if ($Facts) {
+        if ($PSBoundParameters.ContainsKey('Facts')) {
             $JSONHash.sections[1].facts = $Facts | ConvertFrom-Hashtable
         }
-        if ($Color) {
+        if ($PSBoundParameters.ContainsKey('Color')) {
             $JSONHash.themeColor = $ColorMap[$Color]
         }
 
