@@ -7,11 +7,14 @@ function New-TeamsMessage {
     Enables construction of Connector Cards to be passed to the Incoming Webhook of a MS Teams Channel
     This can accept hashtables as part of the Connector Card
     
-    .PARAMETER Text
+    .PARAMETER Message
     A simple message to post to a Connector Card - Supports Markdown
-    
+
     .PARAMETER Title
     Title of the Connector Card - Appears at the top of the card in large text formatting
+    
+    .PARAMETER Text
+    A simple message to post to a Connector Card - Supports Markdown
     
     .PARAMETER ActivityTitle
     Heading for the Activity Title within a section on the Connector Card
@@ -50,10 +53,10 @@ function New-TeamsMessage {
         [string]$message,
 
         [Parameter(Mandatory = $true,
-        ParameterSetName = 'Detailed')]
+                   ParameterSetName = 'Detailed')]
         [ValidatePattern('^[\w\d-:*_ ]*$')]
-        
         [string]$Title,
+        
         [Parameter(Mandatory = $false,
                    ParameterSetName = 'Detailed')]
         [ValidatePattern('^[\w\d-:*_ ]*$')]
@@ -90,7 +93,7 @@ function New-TeamsMessage {
             $JSONHash.text = $Text
         }
         if ($PSBoundParameters.ContainsKey('Message')) {
-            $JSONHash.text = $Text
+            $JSONHash.text = $message
         }
         if ($PSBoundParameters.ContainsKey('Title')) {
             $JSONHash.title = $Title
