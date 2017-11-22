@@ -99,10 +99,10 @@ function New-TeamsMessage {
             $JSONHash.title = $Title
         }
         if ($PSBoundParameters.ContainsKey('ActivityTitle')) {
-            $JSONHash.sections.activitytitle = $ActivityTitle
+            $JSONHash.sections[0].activitytitle = $ActivityTitle
         }
         if ($PSBoundParameters.ContainsKey('ActivitySubtitle')) {
-            $JSONHash.sections.activitysubtitle = $ActivitySubtitle
+            $JSONHash.sections[0].activitysubtitle = $ActivitySubtitle
         }
         if ($PSBoundParameters.ContainsKey('Facts')) {
             $JSONHash.sections[1].facts = $Facts | ConvertFrom-Hashtable
