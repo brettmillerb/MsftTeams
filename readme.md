@@ -26,7 +26,9 @@ $info = @{
 }
 ```
 
-`New-TeamsMessage -Title 'This A Test Post To Teams' -Text 'This is the Text on the card' -ActivityTitle 'This works pretty well' -ActivitySubtitle 'Formatting is pretty good too' -Information $info -Color Green`
+```
+New-TeamsMessage -Title 'This A Test Post To Teams' -Text 'This is the Text on the card' -ActivityTitle 'This works pretty well' -ActivitySubtitle 'Formatting is pretty good too' -Information $info -Color Green
+```
 
 
 ### Splatting Parameters
@@ -43,4 +45,6 @@ $params = @{
 }
 ```
 
-`New-TeamsMessage @params`
+```
+New-TeamsMessage @params
+```
