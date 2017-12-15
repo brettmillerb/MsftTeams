@@ -47,34 +47,34 @@ function New-TeamsMessage {
     
     Param (
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Simple',
-                   ValueFromPipeline = $true,
-                   ValueFromPipelineByPropertyName = $true)]
+            ParameterSetName = 'Simple',
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true)]
         [string]$message,
 
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$Title,
         
         [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$Text,
         
         [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$ActivityTitle,
 
         [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$ActivitySubtitle,
         
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Detailed')]
+            ParameterSetName = 'Detailed')]
         [hashtable]$Facts,
+
+        [Parameter(Mandatory = $false,
+            ParameterSetName = 'Detailed')]
+        [scriptblock]$Button,
 
         [Alias('Colour')]
         [string]$Color,
@@ -110,8 +110,13 @@ function New-TeamsMessage {
         if ($PSBoundParameters.ContainsKey('Color')) {
             $JSONHash.themeColor = $ColorMap[$Color]
         }
+        if ($PSBoundParameters.ContainsKey('Button')) {
+            $JSONHash.sections[1].potentialAction = @(& $Button)
+        }
 
         $body = $JSONHash | ConvertTo-Json -Depth 10
+
+        Write-Verbose $body
 
         $restparams = @{
             Uri = $WebhookURI
@@ -120,7 +125,12 @@ function New-TeamsMessage {
             ContentType = 'application/JSON'
             Proxy = if ($Proxy) {$proxy}
         }
-
-        $null = Invoke-RestMethod @restparams
+        
+        try {
+            $null = Invoke-RestMethod @restparams -ErrorAction Stop
+        }
+        catch {
+            $_[0].exception.message
+        }
     }
 }

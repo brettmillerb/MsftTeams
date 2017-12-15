@@ -18,10 +18,10 @@ For posting messages to an Incoming Webhook within a Microsoft Teams channel.
 Passing Details information requires a hashtable of key / value pairs and can be created with the following
 
 ```
-$info = @{
+$info = [ordered]@{
     Enabled = $true
     givenname = 'Brett'
-    emailaddress = 'brettm@millerb.co.uk
+    emailaddress = 'brettm@millerb.co.uk'
     surname = 'Miller'
 }
 ```
@@ -47,4 +47,16 @@ $params = @{
 
 ```
 New-TeamsMessage @params
+```
+
+### Adding Buttons
+
+As above but specify the `Button` Parameter using a ScriptBlock
+
+```
+New-TeamsMessage @params -Button {
+    Button -Name 'millerb' -Url 'http://millerb.co.uk'
+    Button -Name 'google' -Url 'http://google.co.uk'
+    Button -Name 'BBC Online' -Url 'http://bbc.co.uk'
+}
 ```
