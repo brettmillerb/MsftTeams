@@ -1,7 +1,7 @@
 function Button {
     Param (
-        [string]$name,
-        [string]$url
+        [string]$Name,
+        [string]$Url
     )
     process {
         @(    

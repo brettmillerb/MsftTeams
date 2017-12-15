@@ -48,3 +48,36 @@ $params = @{
 ```
 New-TeamsMessage @params
 ```
+
+### Adding Buttons
+Create a hashtable of information you want to send to Teams
+
+```
+$info = [ordered]@{
+    Enabled = $true
+    givenname = 'Brett'
+    emailaddress = 'brettm@millerb.co.uk'
+    surname = 'Miller'
+}
+```
+Splat the parameters to pass to the function
+
+```
+$params = @{
+    title               = 'Title'
+    text                = 'Text'
+    ActivityTitle       = 'ActivityTitle'
+    ActivitySubtitle    = 'ActivitySubtitle'
+    Facts               = $hash
+    WebhookURI          = $webhook
+}
+```
+Create the buttons
+
+```
+New-TeamsMessage @params -Button {
+    Button -Name 'millerb' -Url 'http://millerb.co.uk'
+    Button -Name 'google' -Url 'http://google.co.uk'
+    Button -Name 'BBC Online' -Url 'http://bbc.co.uk'
+}
+```
