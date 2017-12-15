@@ -72,6 +72,10 @@ function New-TeamsMessage {
             ParameterSetName = 'Detailed')]
         [hashtable]$Facts,
 
+        [Parameter(Mandatory = $false,
+            ParameterSetName = 'Detailed')]
+        [scriptblock]$Button,
+
         [Alias('Colour')]
         [string]$Color,
 
@@ -106,8 +110,13 @@ function New-TeamsMessage {
         if ($PSBoundParameters.ContainsKey('Color')) {
             $JSONHash.themeColor = $ColorMap[$Color]
         }
+        if ($PSBoundParameters.ContainsKey('Button')) {
+            $JSONHash.sections[1].potentialAction = @(& $Button)
+        }
 
         $body = $JSONHash | ConvertTo-Json -Depth 10
+
+        Write-Verbose $body
 
         $restparams = @{
             Uri = $WebhookURI
@@ -116,7 +125,12 @@ function New-TeamsMessage {
             ContentType = 'application/JSON'
             Proxy = if ($Proxy) {$proxy}
         }
-
-        $null = Invoke-RestMethod @restparams
+        
+        try {
+            $null = Invoke-RestMethod @restparams -ErrorAction Stop
+        }
+        catch {
+            $_[0].exception.message
+        }
     }
 }
