@@ -47,33 +47,29 @@ function New-TeamsMessage {
     
     Param (
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Simple',
-                   ValueFromPipeline = $true,
-                   ValueFromPipelineByPropertyName = $true)]
+            ParameterSetName = 'Simple',
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true)]
         [string]$message,
 
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$Title,
         
         [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$Text,
         
         [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$ActivityTitle,
 
         [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Detailed')]
-        [ValidatePattern('^[\w\d-:*_ ]*$')]
+            ParameterSetName = 'Detailed')]
         [string]$ActivitySubtitle,
         
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Detailed')]
+            ParameterSetName = 'Detailed')]
         [hashtable]$Facts,
 
         [Alias('Colour')]
