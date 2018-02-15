@@ -1,39 +1,37 @@
 @{
     TextInput = @{
-        "@type" = 'ActionCard'
-        Name    = 'Comment'
-        Inputs  = @(
+        '@type'     = 'ActionCard'
+        'Name'      = $null
+        'Inputs'    = @(
             @{
-                "@type"     = 'TextInput'
-                id          = $null
-                isMultiLine = $true
-                title       = $null
+                '@type'         = 'TextInput'
+                'id'            = 'Comment'
+                'isMultiLine'   = $true
+                'title'         = 'Enter Your Text Input Here'
             }
         )
         actions = @(
             @{
-                "@type" = 'HttpPOST'
-                Name    = $null
-                target  = $null
+                '@type'     = 'HttpPOST'
+                'Name'      = 'OK'
+                'target'    = $null
             }
         )
     }
     DateInput = @{
-        "@type" = 'ActionCard'
-        Name    = 'Comment'
-        Inputs  = @(
+        '@type'     = 'ActionCard'
+        'Name'      = $null
+        'Inputs'    = @(
             @{
-                "@type"     = 'DateInput'
-                id          = $null
-                isMultiLine = $true
-                title       = $null
+                '@type' = 'DateInput'
+                'id'    = 'dueDate'
             }
         )
         actions = @(
             @{
-                "@type" = 'HttpPOST'
-                Name    = $null
-                target  = $null
+                '@type'     = 'HttpPOST'
+                'Name'      = 'OK'
+                'target'    = $null
             }
         )
     }

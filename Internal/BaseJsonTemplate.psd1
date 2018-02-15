@@ -1,26 +1,26 @@
 @{
     BaseJson = @{
-        "@type"     =  'MessageCard'
-        "@Context"  =  "http://schema.org/extensions"
-        Summary     = $null
-        themeColor  = $null
-        title       = $null
-        text        = $null
-        sections    = @(
+        '@type'     =  'MessageCard'
+        '@Context'  =  'http://schema.org/extensions'
+        'Summary'     = $null
+        'themeColor'  = $null
+        'title'       = $null
+        'text'        = $null
+        'sections'    = @(
             @{
-                activitytitle       = $null
-                activitysubtitle    = $null
+                'activitytitle'       = $null
+                'activitysubtitle'    = $null
             }
             @{
-                facts   = $null
-                potentialAction = @(
+                'facts'             = $null
+                'potentialAction'   = @(
                     @{
-                        name    = $null
-                        "@type" = 'OpenUri'
-                        targets = @(
+                        'name'      = $null
+                        '@type'     = 'OpenUri'
+                        'targets'   = @(
                             @{
-                                os  = 'default'
-                                uri = $null
+                                'os'  = 'default'
+                                'uri' = $null
                             }
                         )
                     }
