@@ -55,8 +55,9 @@ As above but specify the `Button` Parameter using a ScriptBlock
 
 ```
 New-TeamsMessage @params -Button {
-    Button -Name 'millerb' -Url 'http://millerb.co.uk'
-    Button -Name 'google' -Url 'http://google.co.uk'
-    Button -Name 'BBC Online' -Url 'http://bbc.co.uk'
+    Button -ButtonType TextInput -ButtonName 'Leave a Comment' -TargetURI 'https://millerb.co.uk'
+    Button -ButtonType DateInput -ButtonName 'Choose a Date' -TargetURI 'https://millerb.co.uk'
+    Button -ButtonType HttpPost -ButtonName 'POST Stuff' -TargetURI 'https://millerb.co.uk'
+    Button -ButtonType OpenURI -ButtonName 'Open Me :)' -TargetURI 'https://millerb.co.uk'
 }
 ```
