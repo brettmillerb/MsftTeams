@@ -52,7 +52,7 @@ function New-TeamsMessage {
             ValueFromPipelineByPropertyName = $true)]
         [string]$message,
 
-        [Parameter(Mandatory = $true,
+        [Parameter(Mandatory = $false,
             ParameterSetName = 'Detailed')]
         [string]$Title,
         

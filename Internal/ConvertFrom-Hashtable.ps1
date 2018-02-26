@@ -38,6 +38,6 @@ function ConvertFrom-Hashtable {
     )
 
     Process {
-        $Hashtable.keys | Select-Object @{name='Name';expression={$_}}, @{name='Value';expression={$hashtable[$_]}}
+            $Hashtable.keys | Select-Object @{name='Name';expression={$_}}, @{name='Value';expression={$hashtable[$_]}}
     }
 }
