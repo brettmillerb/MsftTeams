@@ -8,8 +8,9 @@
         'text'        = $null
         'sections'    = @(
             @{
-                'activitytitle'       = $null
-                'activitysubtitle'    = $null
+                'activitytitle'         = $null
+                'activitysubtitle'      = $null
+                'images'                = @()
             }
             @{
                 'facts'             = $null

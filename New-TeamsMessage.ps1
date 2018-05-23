@@ -76,6 +76,10 @@ function New-TeamsMessage {
             ParameterSetName = 'Detailed')]
         [scriptblock]$Button,
 
+        [Parameter(Mandatory = $false,
+            ParameterSetName = 'Detailed')]
+        [scriptblock]$Image,
+
         [Alias('Colour')]
         [string]$Color,
 
@@ -113,6 +117,9 @@ function New-TeamsMessage {
         if ($PSBoundParameters.ContainsKey('Button')) {
             $JSONHash.sections[1].potentialAction = @(& $Button)
         }
+        if ($PSBoundParameters.ContainsKey('Image')) {
+            $JSONHash.sections[0].images = @(& $image)
+        }
 
         $body = $JSONHash | ConvertTo-Json -Depth 10
 
@@ -130,7 +137,7 @@ function New-TeamsMessage {
             $null = Invoke-RestMethod @restparams -ErrorAction Stop
         }
         catch {
-            $_[0].exception.message
+            $_.exception.message
         }
     }
 }

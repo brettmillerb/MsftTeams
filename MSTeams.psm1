@@ -1,6 +1,7 @@
 # Dot source Public function file
 . $psscriptroot\New-TeamsMessage.ps1
 . $psscriptroot\Button.ps1
+. $psscriptroot\Image.ps1
 . $psscriptroot\internal\ConvertFrom-Hashtable.ps1
 . $psscriptroot\internal\New-BaseJsonObj.ps1
 
@@ -146,4 +147,4 @@ $ColorMap = @{
     yellowgreen             = "9ACD32"
 }
 
-Export-ModuleMember -Function New-TeamsMessage, Button -Variable ColorMap
+Export-ModuleMember -Function New-TeamsMessage, Button, Image -Variable ColorMap
