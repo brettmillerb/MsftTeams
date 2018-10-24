@@ -134,7 +134,9 @@ function New-TeamsMessage {
         }
         
         try {
-            $null = Invoke-RestMethod @restparams -ErrorAction Stop
+            if ($pscmdlet.ShouldProcess("MSTeams Channel", "Sending Message $($JSONHash.text)")) {
+                $null = Invoke-RestMethod @restparams -ErrorAction Stop
+            }
         }
         catch {
             $_.exception.message
