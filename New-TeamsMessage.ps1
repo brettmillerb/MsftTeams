@@ -43,7 +43,8 @@ function New-TeamsMessage {
     .NOTES
     General notes
     #>
-    [CmdletBinding(DefaultParameterSetName = 'Simple')]
+    [CmdletBinding(DefaultParameterSetName = 'Simple',
+        SupportsShouldProcess = $true)]
     
     Param (
         [Parameter(Mandatory = $true,
