@@ -79,7 +79,7 @@ function New-TeamsMessage {
 
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Detailed')]
-        [scriptblock]$Image,
+        [string[]]$Image,
 
         [Alias('Colour')]
         [string]$Color,
@@ -119,7 +119,7 @@ function New-TeamsMessage {
             $JSONHash.sections[1].potentialAction = @(& $Button)
         }
         if ($PSBoundParameters.ContainsKey('Image')) {
-            $JSONHash.sections[0].images = @(& $image)
+            $JSONHash.sections[0].images = @(New-ImageObject -TargetURI $Image)
         }
 
         $body = $JSONHash | ConvertTo-Json -Depth 10
