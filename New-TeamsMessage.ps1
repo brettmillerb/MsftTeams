@@ -43,7 +43,8 @@ function New-TeamsMessage {
     .NOTES
     General notes
     #>
-    [CmdletBinding(DefaultParameterSetName = 'Simple')]
+    [CmdletBinding(DefaultParameterSetName = 'Simple',
+        SupportsShouldProcess = $true)]
     
     Param (
         [Parameter(Mandatory = $true,
@@ -75,6 +76,10 @@ function New-TeamsMessage {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Detailed')]
         [scriptblock]$Button,
+
+        [Parameter(Mandatory = $false,
+            ParameterSetName = 'Detailed')]
+        [string[]]$Image,
 
         [Alias('Colour')]
         [string]$Color,
@@ -113,6 +118,9 @@ function New-TeamsMessage {
         if ($PSBoundParameters.ContainsKey('Button')) {
             $JSONHash.sections[1].potentialAction = @(& $Button)
         }
+        if ($PSBoundParameters.ContainsKey('Image')) {
+            $JSONHash.sections[0].images = @(New-ImageObject -TargetURI $Image)
+        }
 
         $body = $JSONHash | ConvertTo-Json -Depth 10
 
@@ -127,10 +135,12 @@ function New-TeamsMessage {
         }
         
         try {
-            $null = Invoke-RestMethod @restparams -ErrorAction Stop
+            if ($pscmdlet.ShouldProcess("MSTeams Channel", "Sending Message $($JSONHash.text)")) {
+                $null = Invoke-RestMethod @restparams -ErrorAction Stop
+            }
         }
         catch {
-            $_[0].exception.message
+            $_.exception.message
         }
     }
 }

@@ -3,6 +3,7 @@
 . $psscriptroot\Button.ps1
 . $psscriptroot\internal\ConvertFrom-Hashtable.ps1
 . $psscriptroot\internal\New-BaseJsonObj.ps1
+. $psscriptroot\internal\New-ImageObject.ps1
 
 # Import Color Settings
 $ColorMap = @{
