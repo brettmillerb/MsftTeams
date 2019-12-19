@@ -1,9 +1,9 @@
 # Dot source Public function file
-. $psscriptroot\New-TeamsMessage.ps1
-. $psscriptroot\Button.ps1
-. $psscriptroot\internal\ConvertFrom-Hashtable.ps1
-. $psscriptroot\internal\New-BaseJsonObj.ps1
-. $psscriptroot\internal\New-ImageObject.ps1
+. $psscriptroot\public\New-TeamsMessage.ps1
+. $psscriptroot\public\Button.ps1
+. $psscriptroot\private\ConvertFrom-Hashtable.ps1
+. $psscriptroot\private\New-BaseJsonObj.ps1
+. $psscriptroot\private\New-ImageObject.ps1
 
 # Import Color Settings
 $ColorMap = @{
