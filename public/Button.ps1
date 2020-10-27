@@ -54,7 +54,8 @@ function Button {
     )
 
     begin {
-        $buttonhash = Import-PowerShellDataFile $PSScriptRoot\internal\ButtonJsonTemplate.psd1
+        $scriptPath = split-path -parent $PSScriptRoot
+        $buttonhash = Import-PowerShellDataFile $scriptPath\private\ButtonJsonTemplate.psd1
         $typehash = $buttonhash[$PSBoundParameters.ButtonType]
     }
     process {
