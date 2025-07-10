@@ -1,0 +1,10 @@
+{
+    "name": "msftteamspy",
+    "version": "0.1.0",
+    "description": "Python library for creating and sending Microsoft Teams messages",
+    "author": "Brett Miller",
+    "install_requires": [
+        "requests"
+    ],
+    "python_requires": ">=3.6"
+}
